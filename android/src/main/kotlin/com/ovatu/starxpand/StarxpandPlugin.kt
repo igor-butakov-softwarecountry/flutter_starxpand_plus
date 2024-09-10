@@ -979,7 +979,7 @@ fun StarPrinterModel.value(): String {
         StarPrinterModel.SM_L200 -> "smL200"
         StarPrinterModel.SM_L300 -> "smL300"
         StarPrinterModel.SP700 -> "sp700"
-        StarPrinterModel.mC_Label3 -> "mC_Label3"
+        StarPrinterModel.mC_Label3 -> "mCLabel3"
         else -> "unknown"
     }
 }

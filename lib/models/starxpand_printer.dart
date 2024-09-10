@@ -42,6 +42,8 @@ enum StarXpandPrinterModel {
   smL200('SM-L200', [StarXpandPrinterPaper.mm58]),
   smL300('SM-L300', [StarXpandPrinterPaper.mm58]),
   sp700('SP-700', [StarXpandPrinterPaper.mm76]),
+  mCLabel3('mC_Label3', [StarXpandPrinterPaper.mm80]),
+
   unknown('Unknown', []);
 
   final String label;
