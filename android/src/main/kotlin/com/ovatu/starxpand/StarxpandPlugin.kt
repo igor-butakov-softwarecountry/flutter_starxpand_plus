@@ -767,6 +767,8 @@ class StarxpandPlugin : FlutterPlugin, MethodCallHandler, ActivityAware {
                         "partial" -> CutType.Partial
                         "fullDirect" -> CutType.FullDirect
                         "partialDirect" -> CutType.PartialDirect
+                        "tearOff" -> CutType.TearOff
+
                         else -> CutType.Partial
                     }
                     printerBuilder.actionCut(cutType)
