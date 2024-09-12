@@ -2,7 +2,8 @@ import 'dart:typed_data';
 
 import 'package:starxpand/models/starxpand_document.dart';
 
-enum StarXpandCutType { full, partial, fullDirect, partialDirect }
+enum StarXpandCutType { full, partial, fullDirect, partialDirect, tearOff }
+
 enum StarXpandBarcodeSymbology {
   upcE,
   upcA,
@@ -16,6 +17,7 @@ enum StarXpandBarcodeSymbology {
   code93,
   nw7
 }
+
 enum StarXpandBarcodeBarRatioLevel { levelPlus1, level0, levelMinus1 }
 
 enum StarXpandPdf417Level {
@@ -31,12 +33,15 @@ enum StarXpandPdf417Level {
 }
 
 enum StarXpandQRCodeModel { model1, model2 }
+
 enum StarXpandQRCodeLevel { l, m, q, h }
 
 enum StarXpandLineStyle { double, single }
 
 enum StarXpandStyleAlignment { left, center, right }
+
 enum StarXpandStyleFontType { a, b }
+
 enum StarXpandStyleInternationalCharacter {
   usa,
   france,
@@ -60,6 +65,7 @@ enum StarXpandStyleInternationalCharacter {
   arabic,
   legal
 }
+
 enum StarXpandStyleCharacterEncodingType {
   japanese,
   simplifiedChinese,
@@ -67,6 +73,7 @@ enum StarXpandStyleCharacterEncodingType {
   korean,
   codePage
 }
+
 enum StarXpandStyleCjkCharacterType {
   japanese,
   simplifiedChinese,
@@ -194,7 +201,8 @@ class StarXpandDocumentPrint extends StarXpandDocumentContent {
     }..trim());
   }
 
-  actionPrintRuledLine(double width, {
+  actionPrintRuledLine(
+    double width, {
     required double? thickness,
     StarXpandLineStyle lineStyle = StarXpandLineStyle.single,
   }) {
