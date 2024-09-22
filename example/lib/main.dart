@@ -71,7 +71,7 @@ class _MyAppState extends State<MyApp> {
 
     printDoc.add(StarXpandDocumentPrint()
       ..actionPrintImage(halalLogo, 70)
-      ..add(StarXpandDocumentPrint().actionPrintText("PACK DATE")));
+      ..add(StarXpandDocumentPrint()..actionPrintText("PACK DATE")));
 
     printDoc.addPageMode(StarXpandPageMode()
       ..actionPrintImage(halalLogo, 0, 0, 70)
