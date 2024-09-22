@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:starxpand/models/starxpand_document_display.dart';
-import 'package:starxpand/models/starxpand_document_page_mode.dart';
 import 'package:starxpand/starxpand.dart';
 
 void main() {
@@ -42,13 +41,6 @@ class _MyAppState extends State<MyApp> {
         printer, (p) => print('_startInputListener: ${p.inputString}'));
   }
 
-  _printPageMode(StarXpandPrinter printer) async {
-    var doc = StarXpandDocument();
-    var printDoc = StarXpandDocumentPageMode();
-    doc.addPageMode(printDoc);
-    StarXpand.printDocument(printer, doc);
-  }
-
   _print(StarXpandPrinter printer) async {
     var doc = StarXpandDocument();
     var printDoc = StarXpandDocumentPrint();
@@ -57,6 +49,7 @@ class _MyAppState extends State<MyApp> {
         internationalCharacter: StarXpandStyleInternationalCharacter.usa,
         characterSpace: 0.0,
         alignment: StarXpandStyleAlignment.center);
+    printDoc.addPageMode();
     printDoc.actionPrintText("Star Clothing Boutique\n"
         "123 Star Road\n"
         "City, State 12345\n");
@@ -162,7 +155,7 @@ class _MyAppState extends State<MyApp> {
           if (printers != null)
             for (var p in printers!)
               ListTile(
-                  onTap: () => _printPageMode(p),
+                  onTap: () => _print(p),
                   title: Text(p.model.label + "(${p.interface.name})"),
                   subtitle: Text(p.identifier),
                   trailing: Row(

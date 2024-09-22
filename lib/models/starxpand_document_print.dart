@@ -135,6 +135,10 @@ class StarXpandDocumentPrint extends StarXpandDocumentContent {
     _actions.add({'action': 'add', 'data': print.getData()});
   }
 
+  addPageMode() {
+    _actions.add({'action': 'addPageMode', 'data': {}});
+  }
+
   actionCut(StarXpandCutType type) {
     _actions.add({'action': 'cut', 'type': type.name});
   }

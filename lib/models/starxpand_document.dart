@@ -1,12 +1,10 @@
 import 'package:starxpand/models/starxpand_document_display.dart';
-import 'package:starxpand/models/starxpand_document_page_mode.dart';
 import 'package:starxpand/starxpand.dart';
 
 class StarXpandDocument {
   final List<StarXpandDocumentContent> _contents = [];
 
   addPrint(StarXpandDocumentPrint print) => _contents.add(print);
-  addPageMode(StarXpandDocumentPageMode print) => _contents.add(print);
   addDrawer(StarXpandDocumentDrawer drawer) => _contents.add(drawer);
   addDisplay(StarXpandDocumentDisplay display) => _contents.add(display);
 
