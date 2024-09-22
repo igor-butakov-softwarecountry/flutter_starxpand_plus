@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
 import 'package:starxpand/models/starxpand_document_display.dart';
 import 'package:starxpand/starxpand.dart';
 
@@ -45,12 +44,6 @@ class _MyAppState extends State<MyApp> {
   _print(StarXpandPrinter printer) async {
     var doc = StarXpandDocument();
     var printDoc = StarXpandDocumentPrint();
-
-    http.Response response = await http.get(
-      Uri.parse('https://ovatu.com/marketing/images/ovatu/logo-large-navy.png'),
-    );
-
-    printDoc.actionPrintImage(response.bodyBytes, 350);
 
     printDoc.style(
         internationalCharacter: StarXpandStyleInternationalCharacter.usa,
