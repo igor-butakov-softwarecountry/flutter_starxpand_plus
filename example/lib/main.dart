@@ -55,21 +55,27 @@ class _MyAppState extends State<MyApp> {
         internationalCharacter: StarXpandStyleInternationalCharacter.usa,
         characterSpace: 0.0,
         alignment: StarXpandStyleAlignment.center);
-    // printDoc.addPageMode();
+
     Uint8List imageData = await getImageFromAsset('assets/jihanlogo.jpg');
 
     printDoc.actionPrintImage(imageData, 300);
     printDoc.add(StarXpandDocumentPrint()
       ..style(
-        magnification: StarXpandStyleMagnification(2, 2),
+        magnification: StarXpandStyleMagnification(2, 1),
         alignment: StarXpandStyleAlignment.center,
         bold: true,
       )
       ..actionPrintText("CHICKEN WHOLE"));
 
+    printDoc.addPageMode(StarXpandPageMode()
+      ..actionPrintText("TESTTTTTT")
+      ..style(
+        bold: true,
+      ));
+
     Uint8List halalLogo = await getImageFromAsset('assets/halal_logo.jpg');
 
-    printDoc.actionPrintImage(halalLogo, 100);
+    printDoc.actionPrintImage(halalLogo, 70);
 
     // printDoc.actionPrintImage(image, width)
 

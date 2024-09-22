@@ -90,6 +90,34 @@ class StarXpandStyleMagnification {
   Map toMap() => {'width': width, 'height': height};
 }
 
+class StarXpandPageMode extends StarXpandDocumentContent {
+  final List<Map> _actions = [];
+
+  @override
+  String get type => 'print';
+
+  style({
+    bool? bold,
+  }) {
+    _actions.add({
+      'bold': bold,
+    });
+  }
+
+  actionPrintText(String text) {
+    _actions.add({'action': 'printText', 'text': text});
+  }
+
+  List<Map> getActions() {
+    return _actions;
+  }
+
+  @override
+  Map getData() {
+    return {"actions": _actions};
+  }
+}
+
 class StarXpandDocumentPrint extends StarXpandDocumentContent {
   final List<Map> _actions = [];
 
@@ -135,8 +163,8 @@ class StarXpandDocumentPrint extends StarXpandDocumentContent {
     _actions.add({'action': 'add', 'data': print.getData()});
   }
 
-  addPageMode() {
-    _actions.add({'action': 'addPageMode', 'data': {}});
+  addPageMode(StarXpandPageMode pageMode) {
+    _actions.add({'action': 'addPageMode', 'data': pageMode.getData()});
   }
 
   actionCut(StarXpandCutType type) {
