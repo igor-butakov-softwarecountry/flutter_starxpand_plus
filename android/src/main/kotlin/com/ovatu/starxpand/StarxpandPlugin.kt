@@ -641,6 +641,16 @@ class StarxpandPlugin : FlutterPlugin, MethodCallHandler, ActivityAware {
                     val text = action["text"] as String
                     pageModeBuilder.actionPrintText(text)
                 }
+
+                "printImage" -> {
+                    val image = action["image"] as ByteArray
+                    val width = action["width"] as Int
+                    val x = action["x"] as Double
+                    val y = action["y"] as Double
+
+                    val bmp = BitmapFactory.decodeByteArray(image, 0, image.size)
+                    pageModeBuilder.actionPrintImage(PageModeImageParameter(bmp, x, y, width))
+                }
             }
         }
         return pageModeBuilder

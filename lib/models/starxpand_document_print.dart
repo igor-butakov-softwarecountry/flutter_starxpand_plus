@@ -105,6 +105,16 @@ class StarXpandPageMode extends StarXpandDocumentContent {
     });
   }
 
+  actionPrintImage(Uint8List image, int width, double x, double y) {
+    _actions.add({
+      'action': 'printImage',
+      'image': image,
+      'x': x,
+      'y': y,
+      'width': width
+    });
+  }
+
   actionPrintText(String text) {
     _actions.add({'action': 'printText', 'text': text});
   }
