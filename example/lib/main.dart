@@ -162,7 +162,7 @@ class _MyAppState extends State<MyApp> {
           if (printers != null)
             for (var p in printers!)
               ListTile(
-                  onTap: () => _print(p),
+                  onTap: () => _printPageMode(p),
                   title: Text(p.model.label + "(${p.interface.name})"),
                   subtitle: Text(p.identifier),
                   trailing: Row(
