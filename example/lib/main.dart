@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:starxpand/models/starxpand_document_display.dart';
 import 'package:starxpand/starxpand.dart';
 
@@ -21,6 +22,11 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState() {
     super.initState();
+  }
+
+  Future<Uint8List> getImageFromAsset(String assetPath) async {
+    ByteData byteData = await rootBundle.load(assetPath);
+    return byteData.buffer.asUint8List();
   }
 
   // Platform messages are asynchronous, so we initialize in an async method.
@@ -49,68 +55,80 @@ class _MyAppState extends State<MyApp> {
         internationalCharacter: StarXpandStyleInternationalCharacter.usa,
         characterSpace: 0.0,
         alignment: StarXpandStyleAlignment.center);
-    printDoc.addPageMode();
-    printDoc.actionPrintText("Star Clothing Boutique\n"
-        "123 Star Road\n"
-        "City, State 12345\n");
+    // printDoc.addPageMode();
+    Uint8List imageData = await getImageFromAsset('assets/jihanlogo.jpg');
 
-    printDoc.style(alignment: StarXpandStyleAlignment.left);
-    printDoc.actionPrintText("Date:MM/DD/YYYY    Time:HH:MM PM\n"
-        "--------------------------------\n");
-
+    printDoc.actionPrintImage(imageData, 445);
     printDoc.add(StarXpandDocumentPrint()
-      ..style(bold: true)
-      ..actionPrintText("SALE\n"));
+      ..style(
+        magnification: StarXpandStyleMagnification(1, 1),
+        alignment: StarXpandStyleAlignment.center,
+      )
+      ..actionPrintText("CHICKEN WHOLE"));
 
-    printDoc.actionPrintText("SKU         Description    Total\n"
-        "--------------------------------\n"
-        "300678566   PLAIN T-SHIRT  10.99\n"
-        "300692003   BLACK DENIM    29.99\n"
-        "300651148   BLUE DENIM     29.99\n"
-        "300642980   STRIPED DRESS  49.99\n"
-        "300638471   BLACK BOOTS    35.99\n"
-        "Subtotal                  156.95\n"
-        "Tax                         0.00\n"
-        "--------------------------------\n");
+    // printDoc.actionPrintImage(image, width)
 
-    printDoc.actionPrintText("Total     ");
+    // printDoc.actionPrintText("Star Clothing Boutique\n"
+    //     "123 Star Road\n"
+    //     "City, State 12345\n");
 
-    printDoc.add(StarXpandDocumentPrint()
-      ..style(magnification: StarXpandStyleMagnification(2, 2))
-      ..actionPrintText("   \$156.95\n"));
+    // printDoc.style(alignment: StarXpandStyleAlignment.left);
+    // printDoc.actionPrintText("Date:MM/DD/YYYY    Time:HH:MM PM\n"
+    //     "--------------------------------\n");
 
-    printDoc.actionPrintText("--------------------------------\n"
-        "Charge\n"
-        "156.95\n"
-        "Visa XXXX-XXXX-XXXX-0123\n");
+    // printDoc.add(StarXpandDocumentPrint()
+    //   ..style(bold: true)
+    //   ..actionPrintText("SALE\n"));
 
-    printDoc.add(StarXpandDocumentPrint()
-      ..style(invert: true)
-      ..actionPrintText("Refunds and Exchanges\n"));
+    // printDoc.actionPrintText("SKU         Description    Total\n"
+    //     "--------------------------------\n"
+    //     "300678566   PLAIN T-SHIRT  10.99\n"
+    //     "300692003   BLACK DENIM    29.99\n"
+    //     "300651148   BLUE DENIM     29.99\n"
+    //     "300642980   STRIPED DRESS  49.99\n"
+    //     "300638471   BLACK BOOTS    35.99\n"
+    //     "Subtotal                  156.95\n"
+    //     "Tax                         0.00\n"
+    //     "--------------------------------\n");
 
-    printDoc.actionPrintText("Within ");
+    // printDoc.actionPrintText("Total     ");
 
-    printDoc.add(StarXpandDocumentPrint()
-      ..style(underLine: true)
-      ..actionPrintText("30 days"));
+    // printDoc.add(StarXpandDocumentPrint()
+    //   ..style(magnification: StarXpandStyleMagnification(2, 2))
+    //   ..actionPrintText("   \$156.95\n"));
 
-    printDoc.actionPrintText(" with receipt\n");
-    printDoc.actionPrintText("And tags attached\n\n");
+    // printDoc.actionPrintText("--------------------------------\n"
+    //     "Charge\n"
+    //     "156.95\n"
+    //     "Visa XXXX-XXXX-XXXX-0123\n");
 
-    printDoc.style(alignment: StarXpandStyleAlignment.center);
+    // printDoc.add(StarXpandDocumentPrint()
+    //   ..style(invert: true)
+    //   ..actionPrintText("Refunds and Exchanges\n"));
 
-    printDoc.actionPrintBarcode("0123456",
-        symbology: StarXpandBarcodeSymbology.jan8,
-        barDots: 3,
-        height: 5,
-        printHri: true);
+    // printDoc.actionPrintText("Within ");
 
-    printDoc.actionFeedLine(1);
+    // printDoc.add(StarXpandDocumentPrint()
+    //   ..style(underLine: true)
+    //   ..actionPrintText("30 days"));
 
-    printDoc.actionPrintQRCode("Hello, World\n",
-        level: StarXpandQRCodeLevel.l, cellSize: 8);
+    // printDoc.actionPrintText(" with receipt\n");
+    // printDoc.actionPrintText("And tags attached\n\n");
 
-    printDoc.actionCut(StarXpandCutType.partial);
+    // printDoc.style(alignment: StarXpandStyleAlignment.center);
+
+    // printDoc.actionPrintBarcode("0123456",
+    //     symbology: StarXpandBarcodeSymbology.jan8,
+    //     barDots: 3,
+    //     height: 5,
+    //     printHri: true);
+
+    // printDoc.actionFeedLine(1);
+
+    // printDoc.actionPrintQRCode("Hello, World\n",
+    //     level: StarXpandQRCodeLevel.l, cellSize: 8);
+
+    printDoc.actionCut(StarXpandCutType.tearOff);
 
     doc.addPrint(printDoc);
     StarXpand.printDocument(printer, doc);
