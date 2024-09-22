@@ -542,6 +542,10 @@ class StarxpandPlugin : FlutterPlugin, MethodCallHandler, ActivityAware {
                             docBuilder.addPrinter(getPrinterBuilder(data))
                         }
 
+                        "page_mode" -> {
+                            docBuilder.addPrinter(getPageModeBuilder(data))
+                        }
+
                         "display" -> {
                             docBuilder.addDisplay(getDisplayBuilder(data))
                         }
@@ -624,6 +628,21 @@ class StarxpandPlugin : FlutterPlugin, MethodCallHandler, ActivityAware {
         }
 
         return displayBuilder
+    }
+
+    private fun getPageModeBuilder(data: Map<*, *>): PageModeBuilder {
+        val pageModeBuilder = PageModeBuilder()
+
+        val actions = data["actions"] as Collection<*>
+
+        for (action in actions) {
+            if (action !is Map<*, *>) continue
+        }
+
+        Log.d("print", "print actions: $actions")
+
+        return pageModeBuilder
+
     }
 
     private fun getPrinterBuilder(data: Map<*, *>): PrinterBuilder {

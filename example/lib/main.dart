@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:starxpand/models/starxpand_document_display.dart';
+import 'package:starxpand/models/starxpand_document_page_mode.dart';
 import 'package:starxpand/starxpand.dart';
 
 void main() {
@@ -39,6 +40,13 @@ class _MyAppState extends State<MyApp> {
   _startInputListener(StarXpandPrinter printer) {
     StarXpand.startInputListener(
         printer, (p) => print('_startInputListener: ${p.inputString}'));
+  }
+
+  _printPageMode(StarXpandPrinter printer) async {
+    var doc = StarXpandDocument();
+    var printDoc = StarXpandDocumentPageMode();
+    doc.addPageMode(printDoc);
+    StarXpand.printDocument(printer, doc);
   }
 
   _print(StarXpandPrinter printer) async {
