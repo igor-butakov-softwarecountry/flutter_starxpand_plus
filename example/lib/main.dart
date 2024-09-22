@@ -73,13 +73,18 @@ class _MyAppState extends State<MyApp> {
     //   ..actionPrintImage(halalLogo, 70)
     //   ..add(StarXpandDocumentPrint()..actionPrintText("PACK DATE")));
 
-    printDoc.addPageMode(StarXpandPageMode()
-      ..actionPrintImage(halalLogo, 20, 0, 70)
-      ..actionPrintText("PACK DATE\n"
-          "02/03/2024")
-      ..style(
-        bold: true,
-      ));
+    printDoc.addPageMode(
+      StarXpandPageMode()
+        ..actionPrintImage(halalLogo, 20, 0, 70)
+        ..add(
+          StarXpandPageMode()
+            ..style(horizontalPositionTo: 50)
+            ..actionPrintText(
+              "PACK DATE\n"
+              "20/09/2023",
+            ),
+        ),
+    );
 
     printDoc.actionCut(StarXpandCutType.full);
 

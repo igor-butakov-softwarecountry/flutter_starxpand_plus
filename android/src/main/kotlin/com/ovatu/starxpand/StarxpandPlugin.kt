@@ -636,6 +636,15 @@ class StarxpandPlugin : FlutterPlugin, MethodCallHandler, ActivityAware {
                     if (action["bold"] != null) {
                         pageModeBuilder.styleBold(action["bold"] as Boolean)
                     }
+                    if (action["verticalPositionTo"] != null) {
+                        pageModeBuilder.styleVerticalPositionTo(action["verticalPositionTo"] as Double)
+                    }
+                    if (action["horizontalPositionTo"] != null) {
+                        pageModeBuilder.styleHorizontalPositionTo(action["horizontalPositionTo"] as Double)
+                    }
+                }
+                "add" -> {
+                    pageModeBuilder.add(getPageModeBuilder(action["data"] as Map<*, *>))
                 }
                 "printText" -> {
                     val text = action["text"] as String

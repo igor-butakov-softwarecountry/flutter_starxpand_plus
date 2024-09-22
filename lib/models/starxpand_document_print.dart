@@ -98,11 +98,19 @@ class StarXpandPageMode extends StarXpandDocumentContent {
 
   style({
     bool? bold,
+    double? verticalPositionTo,
+    double? horizontalPositionTo,
   }) {
     _actions.add({
       'action': 'style',
       'bold': bold,
+      'verticalPositionTo': verticalPositionTo,
+      'horizontalPositionTo': horizontalPositionTo,
     });
+  }
+
+  add(StarXpandPageMode pageMode) {
+    _actions.add({'action': 'add', 'data': pageMode.getData()});
   }
 
   actionPrintImage(Uint8List image, int width, double x, double y) {
