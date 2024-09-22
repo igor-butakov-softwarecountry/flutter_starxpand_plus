@@ -100,6 +100,7 @@ class StarXpandPageMode extends StarXpandDocumentContent {
     bool? bold,
   }) {
     _actions.add({
+      'action': 'style',
       'bold': bold,
     });
   }

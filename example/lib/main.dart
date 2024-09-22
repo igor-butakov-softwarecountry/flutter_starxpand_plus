@@ -59,6 +59,7 @@ class _MyAppState extends State<MyApp> {
     Uint8List imageData = await getImageFromAsset('assets/jihanlogo.jpg');
 
     printDoc.actionPrintImage(imageData, 300);
+    printDoc.actionFeedLine(1);
     printDoc.add(StarXpandDocumentPrint()
       ..style(
         magnification: StarXpandStyleMagnification(2, 1),
@@ -76,68 +77,6 @@ class _MyAppState extends State<MyApp> {
     Uint8List halalLogo = await getImageFromAsset('assets/halal_logo.jpg');
 
     printDoc.actionPrintImage(halalLogo, 70);
-
-    // printDoc.actionPrintImage(image, width)
-
-    // printDoc.actionPrintText("Star Clothing Boutique\n"
-    //     "123 Star Road\n"
-    //     "City, State 12345\n");
-
-    // printDoc.style(alignment: StarXpandStyleAlignment.left);
-    // printDoc.actionPrintText("Date:MM/DD/YYYY    Time:HH:MM PM\n"
-    //     "--------------------------------\n");
-
-    // printDoc.add(StarXpandDocumentPrint()
-    //   ..style(bold: true)
-    //   ..actionPrintText("SALE\n"));
-
-    // printDoc.actionPrintText("SKU         Description    Total\n"
-    //     "--------------------------------\n"
-    //     "300678566   PLAIN T-SHIRT  10.99\n"
-    //     "300692003   BLACK DENIM    29.99\n"
-    //     "300651148   BLUE DENIM     29.99\n"
-    //     "300642980   STRIPED DRESS  49.99\n"
-    //     "300638471   BLACK BOOTS    35.99\n"
-    //     "Subtotal                  156.95\n"
-    //     "Tax                         0.00\n"
-    //     "--------------------------------\n");
-
-    // printDoc.actionPrintText("Total     ");
-
-    // printDoc.add(StarXpandDocumentPrint()
-    //   ..style(magnification: StarXpandStyleMagnification(2, 2))
-    //   ..actionPrintText("   \$156.95\n"));
-
-    // printDoc.actionPrintText("--------------------------------\n"
-    //     "Charge\n"
-    //     "156.95\n"
-    //     "Visa XXXX-XXXX-XXXX-0123\n");
-
-    // printDoc.add(StarXpandDocumentPrint()
-    //   ..style(invert: true)
-    //   ..actionPrintText("Refunds and Exchanges\n"));
-
-    // printDoc.actionPrintText("Within ");
-
-    // printDoc.add(StarXpandDocumentPrint()
-    //   ..style(underLine: true)
-    //   ..actionPrintText("30 days"));
-
-    // printDoc.actionPrintText(" with receipt\n");
-    // printDoc.actionPrintText("And tags attached\n\n");
-
-    // printDoc.style(alignment: StarXpandStyleAlignment.center);
-
-    // printDoc.actionPrintBarcode("0123456",
-    //     symbology: StarXpandBarcodeSymbology.jan8,
-    //     barDots: 3,
-    //     height: 5,
-    //     printHri: true);
-
-    // printDoc.actionFeedLine(1);
-
-    // printDoc.actionPrintQRCode("Hello, World\n",
-    //     level: StarXpandQRCodeLevel.l, cellSize: 8);
 
     printDoc.actionCut(StarXpandCutType.full);
 

@@ -662,6 +662,12 @@ class StarxpandPlugin : FlutterPlugin, MethodCallHandler, ActivityAware {
                     printerBuilder.add(getPrinterBuilder(action["data"] as Map<*, *>))
                 }
 
+                "addPageMode" -> {
+                    val pageModeAreaParameter = PageModeAreaParameter(48.0, 30.0)
+                    var pageModeBuilder = getPageModeBuilder(action["data"] as Map<*, *>)
+                    printerBuilder.addPageMode(pageModeAreaParameter, pageModeBuilder)
+                }
+
                 "style" -> {
                     if (action["alignment"] != null) {
                         printerBuilder.styleAlignment(
@@ -794,11 +800,7 @@ class StarxpandPlugin : FlutterPlugin, MethodCallHandler, ActivityAware {
                     printerBuilder.actionCut(cutType)
                 }
 
-                "addPageMode" -> {
-                    val pageModeAreaParameter = PageModeAreaParameter(48.0, 30.0)
-                    var pageModeBuilder = getPageModeBuilder(action["data"] as Map<*, *>)
-                    printerBuilder.addPageMode(pageModeAreaParameter, pageModeBuilder)
-                }
+                
 
                 "feed" -> {
                     val height = (action["height"] as Double?) ?: 10.0
