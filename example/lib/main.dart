@@ -58,13 +58,18 @@ class _MyAppState extends State<MyApp> {
     // printDoc.addPageMode();
     Uint8List imageData = await getImageFromAsset('assets/jihanlogo.jpg');
 
-    printDoc.actionPrintImage(imageData, 445);
+    printDoc.actionPrintImage(imageData, 300);
     printDoc.add(StarXpandDocumentPrint()
       ..style(
-        magnification: StarXpandStyleMagnification(1, 1),
+        magnification: StarXpandStyleMagnification(2, 2),
         alignment: StarXpandStyleAlignment.center,
+        bold: true,
       )
       ..actionPrintText("CHICKEN WHOLE"));
+
+    Uint8List halalLogo = await getImageFromAsset('assets/halal_logo.jpg');
+
+    printDoc.actionPrintImage(halalLogo, 100);
 
     // printDoc.actionPrintImage(image, width)
 
@@ -128,7 +133,7 @@ class _MyAppState extends State<MyApp> {
     // printDoc.actionPrintQRCode("Hello, World\n",
     //     level: StarXpandQRCodeLevel.l, cellSize: 8);
 
-    printDoc.actionCut(StarXpandCutType.tearOff);
+    printDoc.actionCut(StarXpandCutType.full);
 
     doc.addPrint(printDoc);
     StarXpand.printDocument(printer, doc);
