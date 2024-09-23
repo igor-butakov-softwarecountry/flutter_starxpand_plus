@@ -74,10 +74,7 @@ class _MyAppState extends State<MyApp> {
         ..actionPrintImage(halalLogo, 10, 20, 70)
         ..add(
           StarXpandPageMode()
-            ..style(
-              horizontalPositionTo: 33,
-              verticalPositionTo: 20,
-            )
+            ..style(horizontalPositionTo: 33)
             ..actionPrintText(
               "PACK DATE\n"
               "20/09/2023",
