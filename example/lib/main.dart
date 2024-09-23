@@ -133,7 +133,7 @@ class _MyAppState extends State<MyApp> {
         bold: true,
         magnification: StarXpandStyleMagnification(1, 2),
       )
-      ..actionPrintText("\$9.99")
+      ..actionPrintText("\$ 9.99")
       ..actionPrintImage(halalLogo, 8, 10.5, 70)
       ..style(
         horizontalPositionTo: 33,
