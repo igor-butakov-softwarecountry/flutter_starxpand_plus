@@ -58,10 +58,10 @@ class _MyAppState extends State<MyApp> {
 
     Uint8List imageData = await getImageFromAsset('assets/jihanlogo.jpg');
     printDoc.actionPrintImage(imageData, 260);
-    printDoc.actionFeed(1);
+    printDoc.actionFeed(2);
     printDoc.add(StarXpandDocumentPrint()
       ..style(
-        // magnification: StarXpandStyleMagnification(2, 1),
+        magnification: StarXpandStyleMagnification(1, 2),
         alignment: StarXpandStyleAlignment.center,
         bold: true,
       )
@@ -104,13 +104,13 @@ class _MyAppState extends State<MyApp> {
       ..actionPrintText("UNIT PRICE")
       ..style(horizontalPositionTo: 36, verticalPositionTo: 2, bold: true)
       ..actionPrintText("TOTAL PRICE")
-      ..style(horizontalPositionTo: 4, verticalPositionTo: 4, bold: false)
+      ..style(horizontalPositionTo: 4, verticalPositionTo: 8, bold: false)
       ..actionPrintText("9.99lbs")
-      ..style(horizontalPositionTo: 17, verticalPositionTo: 4, bold: false)
+      ..style(horizontalPositionTo: 17, verticalPositionTo: 8, bold: false)
       ..actionPrintText("\$2.77/lbs")
-      ..style(horizontalPositionTo: 36, verticalPositionTo: 4, bold: true)
+      ..style(horizontalPositionTo: 36, verticalPositionTo: 8, bold: true)
       ..actionPrintText("\$15.77")
-      ..actionPrintImage(halalLogo, 8, 14, 70)
+      ..actionPrintImage(halalLogo, 8, 14.5, 70)
       ..style(horizontalPositionTo: 33, verticalPositionTo: 16, bold: true)
       ..actionPrintText("PACK DATE")
       ..style(horizontalPositionTo: 33, verticalPositionTo: 20, bold: false)
