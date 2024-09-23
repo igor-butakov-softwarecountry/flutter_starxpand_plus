@@ -70,9 +70,8 @@ class _MyAppState extends State<MyApp> {
     Uint8List halalLogo = await getImageFromAsset('assets/halal_logo.jpg');
 
     printDoc.addPageMode(StarXpandPageMode()
-      ..style(horizontalPositionTo: 10, verticalPositionTo: 11)
-      ..actionPrintImage(halalLogo, 4, 18, 70)
-      ..style(horizontalPositionTo: 33, verticalPositionTo: 18)
+      ..actionPrintImage(halalLogo, 4, 16, 70)
+      ..style(horizontalPositionTo: 33, verticalPositionTo: 16)
       ..actionPrintText("PACK DATE")
       ..style(horizontalPositionTo: 33, verticalPositionTo: 20)
       ..actionPrintText("11/11/2011"));
