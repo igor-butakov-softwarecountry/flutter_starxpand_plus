@@ -69,6 +69,13 @@ class _MyAppState extends State<MyApp> {
 
     Uint8List halalLogo = await getImageFromAsset('assets/halal_logo.jpg');
 
+    double thickness = 0.3;
+    double labelWidth = 58;
+    double firstLineY = 0;
+    double secondLineY = 4;
+    double tableHeaderY = 1;
+    double tableRowY = 6;
+
     printDoc.addPageMode(StarXpandPageMode()
       ..style(
         bold: false,
@@ -76,60 +83,65 @@ class _MyAppState extends State<MyApp> {
       )
       ..actionPrintRuledLine(
         xStart: 0,
-        yStart: 0,
-        xEnd: 58,
-        yEnd: 0,
-        thickness: 0.3,
+        yStart: firstLineY,
+        xEnd: labelWidth,
+        yEnd: firstLineY,
+        thickness: thickness,
       )
       ..actionPrintRuledLine(
         xStart: 0,
-        yStart: 5,
-        xEnd: 58,
-        yEnd: 5,
-        thickness: 0.3,
+        yStart: secondLineY,
+        xEnd: labelWidth,
+        yEnd: secondLineY,
+        thickness: thickness,
       )
       ..actionPrintRuledLine(
         xStart: 16,
         yStart: 0,
         xEnd: 16,
         yEnd: 11,
-        thickness: 0.3,
+        thickness: thickness,
       )
       ..actionPrintRuledLine(
         xStart: 34,
         yStart: 0,
         xEnd: 34,
         yEnd: 11,
-        thickness: 0.3,
+        thickness: thickness,
       )
-      ..style(horizontalPositionTo: 4, verticalPositionTo: 1)
+      ..style(horizontalPositionTo: 4, verticalPositionTo: tableHeaderY)
       ..actionPrintText("NET WT.")
-      ..style(horizontalPositionTo: 18, verticalPositionTo: 1)
+      ..style(horizontalPositionTo: 18, verticalPositionTo: tableHeaderY)
       ..actionPrintText("UNIT PRICE")
-      ..style(horizontalPositionTo: 37, verticalPositionTo: 1, bold: true)
+      ..style(
+          horizontalPositionTo: 37,
+          verticalPositionTo: tableHeaderY,
+          bold: true)
       ..actionPrintText("TOTAL PRICE")
-      ..style(horizontalPositionTo: 2.5, verticalPositionTo: 7, bold: false)
+      ..style(
+          horizontalPositionTo: 2.5, verticalPositionTo: tableRowY, bold: false)
       ..actionPrintText("60.00lbs")
-      ..style(horizontalPositionTo: 17, verticalPositionTo: 7, bold: false)
+      ..style(
+          horizontalPositionTo: 17, verticalPositionTo: tableRowY, bold: false)
       ..actionPrintText("\$99.99/lbs")
       ..style(
         horizontalPositionTo: 36,
-        verticalPositionTo: 7,
+        verticalPositionTo: tableRowY,
         bold: true,
         magnification: StarXpandStyleMagnification(2, 1),
       )
       ..actionPrintText("\$99.99")
-      ..actionPrintImage(halalLogo, 8, 11.5, 70)
+      ..actionPrintImage(halalLogo, 8, 10.5, 70)
       ..style(
         horizontalPositionTo: 33,
-        verticalPositionTo: 13,
+        verticalPositionTo: 12,
         bold: true,
         magnification: StarXpandStyleMagnification(1, 1),
       )
       ..actionPrintText("PACK DATE")
       ..style(
         horizontalPositionTo: 33,
-        verticalPositionTo: 17,
+        verticalPositionTo: 16,
         bold: false,
       )
       ..actionPrintText("11/11/2011"));
