@@ -100,9 +100,11 @@ class StarXpandPageMode extends StarXpandDocumentContent {
     bool? bold,
     double? verticalPositionTo,
     double? horizontalPositionTo,
+    StarXpandStyleMagnification? magnification,
   }) {
     _actions.add({
       'action': 'style',
+      'magnification': magnification?.toMap(),
       'bold': bold,
       'verticalPositionTo': verticalPositionTo,
       'horizontalPositionTo': horizontalPositionTo,

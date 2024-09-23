@@ -61,7 +61,7 @@ class _MyAppState extends State<MyApp> {
     printDoc.actionFeed(2);
     printDoc.add(StarXpandDocumentPrint()
       ..style(
-        magnification: StarXpandStyleMagnification(1, 2),
+        magnification: StarXpandStyleMagnification(2, 1),
         alignment: StarXpandStyleAlignment.center,
         bold: true,
       )
@@ -100,16 +100,21 @@ class _MyAppState extends State<MyApp> {
       )
       ..style(horizontalPositionTo: 4, verticalPositionTo: 2)
       ..actionPrintText("NET WT.")
-      ..style(horizontalPositionTo: 17, verticalPositionTo: 2)
+      ..style(horizontalPositionTo: 18, verticalPositionTo: 2)
       ..actionPrintText("UNIT PRICE")
-      ..style(horizontalPositionTo: 36, verticalPositionTo: 2, bold: true)
+      ..style(horizontalPositionTo: 37, verticalPositionTo: 2, bold: true)
       ..actionPrintText("TOTAL PRICE")
       ..style(horizontalPositionTo: 4, verticalPositionTo: 8, bold: false)
-      ..actionPrintText("9.99lbs")
-      ..style(horizontalPositionTo: 17, verticalPositionTo: 8, bold: false)
-      ..actionPrintText("\$2.77/lbs")
-      ..style(horizontalPositionTo: 36, verticalPositionTo: 8, bold: true)
-      ..actionPrintText("\$15.77")
+      ..actionPrintText("60.00lbs")
+      ..style(horizontalPositionTo: 18, verticalPositionTo: 8, bold: false)
+      ..actionPrintText("\$99.99/lbs")
+      ..style(
+        horizontalPositionTo: 38,
+        verticalPositionTo: 8,
+        bold: true,
+        magnification: StarXpandStyleMagnification(2, 2),
+      )
+      ..actionPrintText("\$99.99")
       ..actionPrintImage(halalLogo, 8, 14.5, 70)
       ..style(horizontalPositionTo: 33, verticalPositionTo: 16, bold: true)
       ..actionPrintText("PACK DATE")

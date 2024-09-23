@@ -642,6 +642,16 @@ class StarxpandPlugin : FlutterPlugin, MethodCallHandler, ActivityAware {
                     if (action["horizontalPositionTo"] != null) {
                         pageModeBuilder.styleHorizontalPositionTo(action["horizontalPositionTo"] as Double)
                     }
+                    if (action["magnification"] != null) {
+                        val magnification = action["magnification"] as Map<*, *>
+
+                        printerBuilder.styleMagnification(
+                            MagnificationParameter(
+                                magnification["width"] as Int,
+                                magnification["height"] as Int
+                            )
+                        )
+                    }
                 }
                 "add" -> {
                     pageModeBuilder.add(getPageModeBuilder(action["data"] as Map<*, *>))
