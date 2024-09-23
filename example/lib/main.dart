@@ -76,60 +76,60 @@ class _MyAppState extends State<MyApp> {
       )
       ..actionPrintRuledLine(
         xStart: 0,
-        yStart: 1,
+        yStart: 0,
         xEnd: 58,
-        yEnd: 1,
+        yEnd: 0,
         thickness: 0.3,
       )
       ..actionPrintRuledLine(
         xStart: 0,
-        yStart: 6,
+        yStart: 5,
         xEnd: 58,
-        yEnd: 6,
+        yEnd: 5,
         thickness: 0.3,
       )
       ..actionPrintRuledLine(
         xStart: 16,
-        yStart: 1,
+        yStart: 0,
         xEnd: 16,
-        yEnd: 12,
+        yEnd: 11,
         thickness: 0.3,
       )
       ..actionPrintRuledLine(
         xStart: 34,
-        yStart: 1,
+        yStart: 0,
         xEnd: 34,
-        yEnd: 12,
+        yEnd: 11,
         thickness: 0.3,
       )
-      ..style(horizontalPositionTo: 4, verticalPositionTo: 2)
+      ..style(horizontalPositionTo: 4, verticalPositionTo: 1)
       ..actionPrintText("NET WT.")
-      ..style(horizontalPositionTo: 18, verticalPositionTo: 2)
+      ..style(horizontalPositionTo: 18, verticalPositionTo: 1)
       ..actionPrintText("UNIT PRICE")
-      ..style(horizontalPositionTo: 37, verticalPositionTo: 2, bold: true)
+      ..style(horizontalPositionTo: 37, verticalPositionTo: 1, bold: true)
       ..actionPrintText("TOTAL PRICE")
-      ..style(horizontalPositionTo: 2.5, verticalPositionTo: 8, bold: false)
+      ..style(horizontalPositionTo: 2.5, verticalPositionTo: 7, bold: false)
       ..actionPrintText("60.00lbs")
-      ..style(horizontalPositionTo: 15, verticalPositionTo: 8, bold: false)
+      ..style(horizontalPositionTo: 17, verticalPositionTo: 7, bold: false)
       ..actionPrintText("\$99.99/lbs")
       ..style(
-        horizontalPositionTo: 38,
-        verticalPositionTo: 8,
+        horizontalPositionTo: 36,
+        verticalPositionTo: 7,
         bold: true,
         magnification: StarXpandStyleMagnification(2, 1),
       )
       ..actionPrintText("\$99.99")
-      ..actionPrintImage(halalLogo, 8, 12.5, 70)
+      ..actionPrintImage(halalLogo, 8, 11.5, 70)
       ..style(
         horizontalPositionTo: 33,
-        verticalPositionTo: 14,
+        verticalPositionTo: 13,
         bold: true,
         magnification: StarXpandStyleMagnification(1, 1),
       )
       ..actionPrintText("PACK DATE")
       ..style(
         horizontalPositionTo: 33,
-        verticalPositionTo: 18,
+        verticalPositionTo: 17,
         bold: false,
       )
       ..actionPrintText("11/11/2011"));
