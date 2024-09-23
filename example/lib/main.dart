@@ -85,24 +85,24 @@ class _MyAppState extends State<MyApp> {
         thickness: 0.3,
       )
       ..actionPrintRuledLine(
-        xStart: 18,
-        yStart: 5,
-        xEnd: 18,
-        yEnd: 12,
+        xStart: 14,
+        yStart: 1,
+        xEnd: 14,
+        yEnd: 16,
         thickness: 0.3,
       )
       ..actionPrintRuledLine(
-        xStart: 36,
-        yStart: 5,
-        xEnd: 36,
-        yEnd: 12,
+        xStart: 31,
+        yStart: 1,
+        xEnd: 31,
+        yEnd: 16,
         thickness: 0.3,
       )
       ..style(horizontalPositionTo: 2, verticalPositionTo: 2)
       ..actionPrintText("NET WT.")
-      ..style(horizontalPositionTo: 20, verticalPositionTo: 2)
+      ..style(horizontalPositionTo: 18, verticalPositionTo: 2)
       ..actionPrintText("UNIT PRICE")
-      ..style(horizontalPositionTo: 38, verticalPositionTo: 2, bold: true)
+      ..style(horizontalPositionTo: 36, verticalPositionTo: 2, bold: true)
       ..actionPrintText("TOTAL PRICE")
       ..actionPrintImage(halalLogo, 8, 15, 70)
       ..style(horizontalPositionTo: 33, verticalPositionTo: 16, bold: true)
