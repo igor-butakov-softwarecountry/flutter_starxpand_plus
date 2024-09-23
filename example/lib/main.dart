@@ -76,6 +76,9 @@ class _MyAppState extends State<MyApp> {
     double tableHeaderY = 1;
     double tableRowY = 6;
 
+    // 4 digit
+    // nw => 2.5 up => 18 tp=>36
+
     printDoc.addPageMode(StarXpandPageMode()
       ..style(
         bold: false,
@@ -120,17 +123,17 @@ class _MyAppState extends State<MyApp> {
       ..actionPrintText("TOTAL PRICE")
       ..style(
           horizontalPositionTo: 2.5, verticalPositionTo: tableRowY, bold: false)
-      ..actionPrintText("60.00lbs")
+      ..actionPrintText("9.99lbs")
       ..style(
           horizontalPositionTo: 18, verticalPositionTo: tableRowY, bold: false)
-      ..actionPrintText("\$99.99/lbs")
+      ..actionPrintText("\$9.99/lbs")
       ..style(
         horizontalPositionTo: 36,
         verticalPositionTo: tableRowY,
         bold: true,
-        magnification: StarXpandStyleMagnification(2, 1),
+        magnification: StarXpandStyleMagnification(1, 2),
       )
-      ..actionPrintText("\$99.99")
+      ..actionPrintText("\$9.99")
       ..actionPrintImage(halalLogo, 8, 10.5, 70)
       ..style(
         horizontalPositionTo: 33,
