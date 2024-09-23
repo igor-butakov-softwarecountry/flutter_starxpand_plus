@@ -113,6 +113,25 @@ class StarXpandPageMode extends StarXpandDocumentContent {
     _actions.add({'action': 'add', 'data': pageMode.getData()});
   }
 
+  actionPrintRuledLine({
+    required double xStart,
+    required double yStart,
+    required double xEnd,
+    required double yEnd,
+    required double thickness,
+    StarXpandLineStyle lineStyle = StarXpandLineStyle.single,
+  }) {
+    _actions.add({
+      'action': 'printRuledLine',
+      'xStart': xStart,
+      'yStart': yStart,
+      'xEnd': xEnd,
+      'yEnd': yEnd,
+      'thickness': thickness,
+      'lineStyle': lineStyle.name,
+    });
+  }
+
   actionPrintImage(Uint8List image, double x, double y, int width) {
     _actions.add({
       'action': 'printImage',

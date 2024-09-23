@@ -651,6 +651,30 @@ class StarxpandPlugin : FlutterPlugin, MethodCallHandler, ActivityAware {
                     pageModeBuilder.actionPrintText(text)
                 }
 
+                "printRuledLine" -> {
+                    val xStart = action["xStart"] as Double
+                    val yStart = action["yStart"] as Double
+                    val xEnd = action["xEnd"] as Double
+                    val yEnd = action["yEnd"] as Double
+
+                    val parameters = PageModeRuledLineParameter(xStart, yStart, xEnd, yEnd )
+
+                    if (action["thickness"] != null) {
+                        parameters.setThickness(action["thickness"] as Double)
+                    }
+
+                    if (action["lineStyle"] != null) {
+                        val lineStyle = when (action["lineStyle"] as String) {
+                            "double" -> LineStyle.Double
+                            else -> LineStyle.Single
+                        }
+
+                        parameters.setLineStyle(lineStyle)
+                    }
+
+                    pageModeBuilder.actionPrintRuledLine(parameters)
+                }
+
                 "printImage" -> {
                     val image = action["image"] as ByteArray
                     val width = action["width"] as Int
