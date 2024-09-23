@@ -58,7 +58,7 @@ class _MyAppState extends State<MyApp> {
 
     Uint8List imageData = await getImageFromAsset('assets/jihanlogo.jpg');
     printDoc.actionPrintImage(imageData, 260);
-    printDoc.actionFeed(2);
+
     printDoc.add(StarXpandDocumentPrint()
       ..style(
         magnification: StarXpandStyleMagnification(1, 2),
@@ -92,14 +92,14 @@ class _MyAppState extends State<MyApp> {
         xStart: 16,
         yStart: 1,
         xEnd: 16,
-        yEnd: 14,
+        yEnd: 12,
         thickness: 0.3,
       )
       ..actionPrintRuledLine(
         xStart: 34,
         yStart: 1,
         xEnd: 34,
-        yEnd: 14,
+        yEnd: 12,
         thickness: 0.3,
       )
       ..style(horizontalPositionTo: 4, verticalPositionTo: 2)
@@ -108,9 +108,9 @@ class _MyAppState extends State<MyApp> {
       ..actionPrintText("UNIT PRICE")
       ..style(horizontalPositionTo: 37, verticalPositionTo: 2, bold: true)
       ..actionPrintText("TOTAL PRICE")
-      ..style(horizontalPositionTo: 4, verticalPositionTo: 8, bold: false)
+      ..style(horizontalPositionTo: 2.5, verticalPositionTo: 8, bold: false)
       ..actionPrintText("60.00lbs")
-      ..style(horizontalPositionTo: 18, verticalPositionTo: 8, bold: false)
+      ..style(horizontalPositionTo: 17, verticalPositionTo: 8, bold: false)
       ..actionPrintText("\$99.99/lbs")
       ..style(
         horizontalPositionTo: 38,
@@ -119,17 +119,17 @@ class _MyAppState extends State<MyApp> {
         magnification: StarXpandStyleMagnification(2, 1),
       )
       ..actionPrintText("\$99.99")
-      ..actionPrintImage(halalLogo, 8, 14.5, 70)
+      ..actionPrintImage(halalLogo, 8, 12.5, 70)
       ..style(
         horizontalPositionTo: 33,
-        verticalPositionTo: 16,
+        verticalPositionTo: 14,
         bold: true,
         magnification: StarXpandStyleMagnification(1, 1),
       )
       ..actionPrintText("PACK DATE")
       ..style(
         horizontalPositionTo: 33,
-        verticalPositionTo: 20,
+        verticalPositionTo: 18,
         bold: false,
       )
       ..actionPrintText("11/11/2011"));
