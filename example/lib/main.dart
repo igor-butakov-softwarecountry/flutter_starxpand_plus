@@ -58,7 +58,7 @@ class _MyAppState extends State<MyApp> {
 
     Uint8List imageData = await getImageFromAsset('assets/jihanlogo.jpg');
     printDoc.actionPrintImage(imageData, 260);
-
+    printDoc.actionFeed(1);
     printDoc.add(StarXpandDocumentPrint()
       ..style(
         magnification: StarXpandStyleMagnification(1, 2),
@@ -110,7 +110,7 @@ class _MyAppState extends State<MyApp> {
       ..actionPrintText("TOTAL PRICE")
       ..style(horizontalPositionTo: 2.5, verticalPositionTo: 8, bold: false)
       ..actionPrintText("60.00lbs")
-      ..style(horizontalPositionTo: 17, verticalPositionTo: 8, bold: false)
+      ..style(horizontalPositionTo: 15, verticalPositionTo: 8, bold: false)
       ..actionPrintText("\$99.99/lbs")
       ..style(
         horizontalPositionTo: 38,
