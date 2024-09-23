@@ -61,7 +61,7 @@ class _MyAppState extends State<MyApp> {
     printDoc.actionFeed(2);
     printDoc.add(StarXpandDocumentPrint()
       ..style(
-        magnification: StarXpandStyleMagnification(2, 1),
+        magnification: StarXpandStyleMagnification(1, 2),
         alignment: StarXpandStyleAlignment.center,
         bold: true,
       )
@@ -70,6 +70,10 @@ class _MyAppState extends State<MyApp> {
     Uint8List halalLogo = await getImageFromAsset('assets/halal_logo.jpg');
 
     printDoc.addPageMode(StarXpandPageMode()
+      ..style(
+        bold: false,
+        magnification: StarXpandStyleMagnification(1, 1),
+      )
       ..actionPrintRuledLine(
         xStart: 0,
         yStart: 1,
@@ -112,13 +116,22 @@ class _MyAppState extends State<MyApp> {
         horizontalPositionTo: 38,
         verticalPositionTo: 8,
         bold: true,
-        magnification: StarXpandStyleMagnification(2, 2),
+        magnification: StarXpandStyleMagnification(2, 1),
       )
       ..actionPrintText("\$99.99")
       ..actionPrintImage(halalLogo, 8, 14.5, 70)
-      ..style(horizontalPositionTo: 33, verticalPositionTo: 16, bold: true)
+      ..style(
+        horizontalPositionTo: 33,
+        verticalPositionTo: 16,
+        bold: true,
+        magnification: StarXpandStyleMagnification(1, 1),
+      )
       ..actionPrintText("PACK DATE")
-      ..style(horizontalPositionTo: 33, verticalPositionTo: 20, bold: false)
+      ..style(
+        horizontalPositionTo: 33,
+        verticalPositionTo: 20,
+        bold: false,
+      )
       ..actionPrintText("11/11/2011"));
 
     printDoc.actionCut(StarXpandCutType.full);
