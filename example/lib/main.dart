@@ -122,7 +122,7 @@ class _MyAppState extends State<MyApp> {
           horizontalPositionTo: 2.5, verticalPositionTo: tableRowY, bold: false)
       ..actionPrintText("60.00lbs")
       ..style(
-          horizontalPositionTo: 17, verticalPositionTo: tableRowY, bold: false)
+          horizontalPositionTo: 18, verticalPositionTo: tableRowY, bold: false)
       ..actionPrintText("\$99.99/lbs")
       ..style(
         horizontalPositionTo: 36,
