@@ -72,39 +72,38 @@ class _MyAppState extends State<MyApp> {
     printDoc.addPageMode(StarXpandPageMode()
       ..actionPrintRuledLine(
         xStart: 0,
-        yStart: 2,
+        yStart: 1,
         xEnd: 58,
-        yEnd: 2,
-        thickness: 1,
+        yEnd: 1,
+        thickness: 0.3,
       )
       ..actionPrintRuledLine(
         xStart: 0,
         yStart: 6,
         xEnd: 58,
         yEnd: 6,
-        thickness: 1,
+        thickness: 0.3,
       )
       ..actionPrintRuledLine(
-        xStart: 0,
-        yStart: 2,
-        xEnd: 0,
+        xStart: 18,
+        yStart: 5,
+        xEnd: 18,
         yEnd: 12,
-        thickness: 1,
+        thickness: 0.3,
       )
       ..actionPrintRuledLine(
-        xStart: 28,
-        yStart: 2,
-        xEnd: 28,
+        xStart: 36,
+        yStart: 5,
+        xEnd: 36,
         yEnd: 12,
-        thickness: 1,
+        thickness: 0.3,
       )
-      ..actionPrintRuledLine(
-        xStart: 58,
-        yStart: 2,
-        xEnd: 58,
-        yEnd: 12,
-        thickness: 1,
-      )
+      ..style(horizontalPositionTo: 2, verticalPositionTo: 2)
+      ..actionPrintText("NET WT.")
+      ..style(horizontalPositionTo: 20, verticalPositionTo: 2)
+      ..actionPrintText("UNIT PRICE")
+      ..style(horizontalPositionTo: 38, verticalPositionTo: 2, bold: true)
+      ..actionPrintText("TOTAL PRICE")
       ..actionPrintImage(halalLogo, 8, 15, 70)
       ..style(
         horizontalPositionTo: 33,
