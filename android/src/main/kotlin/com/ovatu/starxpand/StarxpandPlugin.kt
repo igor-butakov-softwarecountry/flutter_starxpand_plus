@@ -682,7 +682,7 @@ class StarxpandPlugin : FlutterPlugin, MethodCallHandler, ActivityAware {
                 }
 
                 "addPageMode" -> {
-                    val pageModeAreaParameter = PageModeAreaParameter(72.0, 30.0)
+                    val pageModeAreaParameter = PageModeAreaParameter(58.0, 20.0)
                     var pageModeBuilder = getPageModeBuilder(action["data"] as Map<*, *>)
                     printerBuilder.addPageMode(pageModeAreaParameter, pageModeBuilder)
                 }
