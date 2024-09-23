@@ -105,13 +105,9 @@ class _MyAppState extends State<MyApp> {
       ..style(horizontalPositionTo: 38, verticalPositionTo: 2, bold: true)
       ..actionPrintText("TOTAL PRICE")
       ..actionPrintImage(halalLogo, 8, 15, 70)
-      ..style(
-        horizontalPositionTo: 33,
-        verticalPositionTo: 16,
-        bold: true,
-      )
+      ..style(horizontalPositionTo: 33, verticalPositionTo: 16, bold: true)
       ..actionPrintText("PACK DATE")
-      ..style(horizontalPositionTo: 33, verticalPositionTo: 20)
+      ..style(horizontalPositionTo: 33, verticalPositionTo: 20, bold: false)
       ..actionPrintText("11/11/2011"));
 
     printDoc.actionCut(StarXpandCutType.full);
