@@ -71,12 +71,10 @@ class _MyAppState extends State<MyApp> {
 
     printDoc.addPageMode(
       StarXpandPageMode()
-        ..style(horizontalPositionTo: 10)
-        ..actionPrintImage(halalLogo, 10, 20, 70)
+        ..style(horizontalPositionTo: 33, verticalPositionTo: 10)
+        ..actionPrintText("PACK DATE")
         ..add(
-          StarXpandPageMode()
-            ..style(horizontalPositionTo: 33, verticalPositionTo: 25)
-            ..actionPrintText("PACK DATE"),
+          StarXpandPageMode()..actionPrintImage(halalLogo, 10, 20, 70),
         ),
     );
 
