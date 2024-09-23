@@ -113,7 +113,7 @@ class StarXpandPageMode extends StarXpandDocumentContent {
     _actions.add({'action': 'add', 'data': pageMode.getData()});
   }
 
-  actionPrintImage(Uint8List image, int width, double x, double y) {
+  actionPrintImage(Uint8List image, double x, double y, int width) {
     _actions.add({
       'action': 'printImage',
       'image': image,
