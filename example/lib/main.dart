@@ -61,11 +61,11 @@ class _MyAppState extends State<MyApp> {
     printDoc.actionFeed(1);
     printDoc.add(StarXpandDocumentPrint()
       ..style(
-        magnification: StarXpandStyleMagnification(2, 1),
+        // magnification: StarXpandStyleMagnification(2, 1),
         alignment: StarXpandStyleAlignment.center,
         bold: true,
       )
-      ..actionPrintText("CHICKEN WHOLE"));
+      ..actionPrintText("BEEF SHOULDER WITHOUT BONE"));
 
     Uint8List halalLogo = await getImageFromAsset('assets/halal_logo.jpg');
 
@@ -92,19 +92,25 @@ class _MyAppState extends State<MyApp> {
         thickness: 0.3,
       )
       ..actionPrintRuledLine(
-        xStart: 33,
+        xStart: 34,
         yStart: 1,
-        xEnd: 33,
+        xEnd: 34,
         yEnd: 14,
         thickness: 0.3,
       )
       ..style(horizontalPositionTo: 4, verticalPositionTo: 2)
       ..actionPrintText("NET WT.")
-      ..style(horizontalPositionTo: 19, verticalPositionTo: 2)
+      ..style(horizontalPositionTo: 17, verticalPositionTo: 2)
       ..actionPrintText("UNIT PRICE")
       ..style(horizontalPositionTo: 36, verticalPositionTo: 2, bold: true)
       ..actionPrintText("TOTAL PRICE")
-      ..actionPrintImage(halalLogo, 8, 15, 70)
+      ..style(horizontalPositionTo: 4, verticalPositionTo: 4, bold: false)
+      ..actionPrintText("9.99lbs")
+      ..style(horizontalPositionTo: 17, verticalPositionTo: 4, bold: false)
+      ..actionPrintText("\$2.77/lbs")
+      ..style(horizontalPositionTo: 36, verticalPositionTo: 4, bold: true)
+      ..actionPrintText("\$15.77")
+      ..actionPrintImage(halalLogo, 8, 14, 70)
       ..style(horizontalPositionTo: 33, verticalPositionTo: 16, bold: true)
       ..actionPrintText("PACK DATE")
       ..style(horizontalPositionTo: 33, verticalPositionTo: 20, bold: false)
