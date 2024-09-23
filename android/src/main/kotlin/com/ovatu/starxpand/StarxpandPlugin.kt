@@ -645,7 +645,7 @@ class StarxpandPlugin : FlutterPlugin, MethodCallHandler, ActivityAware {
                     if (action["magnification"] != null) {
                         val magnification = action["magnification"] as Map<*, *>
 
-                        printerBuilder.styleMagnification(
+                        pageModeBuilder.styleMagnification(
                             MagnificationParameter(
                                 magnification["width"] as Int,
                                 magnification["height"] as Int
