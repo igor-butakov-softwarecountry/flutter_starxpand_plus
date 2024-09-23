@@ -72,12 +72,40 @@ class _MyAppState extends State<MyApp> {
     printDoc.addPageMode(StarXpandPageMode()
       ..actionPrintRuledLine(
         xStart: 0,
-        yStart: 5,
-        xEnd: 0,
-        yEnd: 58,
+        yStart: 2,
+        xEnd: 58,
+        yEnd: 2,
         thickness: 1,
       )
-      ..actionPrintImage(halalLogo, 8, 13, 70)
+      ..actionPrintRuledLine(
+        xStart: 0,
+        yStart: 6,
+        xEnd: 58,
+        yEnd: 6,
+        thickness: 1,
+      )
+      ..actionPrintRuledLine(
+        xStart: 0,
+        yStart: 2,
+        xEnd: 0,
+        yEnd: 12,
+        thickness: 1,
+      )
+      ..actionPrintRuledLine(
+        xStart: 28,
+        yStart: 2,
+        xEnd: 28,
+        yEnd: 12,
+        thickness: 1,
+      )
+      ..actionPrintRuledLine(
+        xStart: 58,
+        yStart: 2,
+        xEnd: 58,
+        yEnd: 12,
+        thickness: 1,
+      )
+      ..actionPrintImage(halalLogo, 8, 15, 70)
       ..style(
         horizontalPositionTo: 33,
         verticalPositionTo: 16,
