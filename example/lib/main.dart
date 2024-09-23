@@ -57,7 +57,7 @@ class _MyAppState extends State<MyApp> {
         alignment: StarXpandStyleAlignment.center);
 
     Uint8List imageData = await getImageFromAsset('assets/jihanlogo.jpg');
-    printDoc.actionPrintImage(imageData, 280);
+    printDoc.actionPrintImage(imageData, 260);
     printDoc.actionFeed(1);
     printDoc.add(StarXpandDocumentPrint()
       ..style(
@@ -70,11 +70,12 @@ class _MyAppState extends State<MyApp> {
     Uint8List halalLogo = await getImageFromAsset('assets/halal_logo.jpg');
 
     printDoc.addPageMode(StarXpandPageMode()
-      ..style(horizontalPositionTo: 33, verticalPositionTo: 10)
+      ..style(horizontalPositionTo: 10, verticalPositionTo: 11)
+      ..actionPrintImage(halalLogo, 0, 0, 70)
+      ..style(horizontalPositionTo: 33, verticalPositionTo: 11)
       ..actionPrintText("PACK DATE")
-      ..style(horizontalPositionTo: 33, verticalPositionTo: 15)
+      ..style(horizontalPositionTo: 33, verticalPositionTo: 16)
       ..actionPrintText("11/11/2011"));
-    printDoc.actionPrintImage(halalLogo, 70);
 
     printDoc.actionCut(StarXpandCutType.full);
 
