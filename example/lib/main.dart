@@ -69,21 +69,21 @@ class _MyAppState extends State<MyApp> {
 
     Uint8List halalLogo = await getImageFromAsset('assets/halal_logo.jpg');
 
-    // printDoc.add(StarXpandDocumentPrint()
-    //   ..actionPrintImage(halalLogo, 70)
-    //   ..add(StarXpandDocumentPrint()..actionPrintText("PACK DATE")));
-
-    printDoc
-        .addPageMode(StarXpandPageMode()..actionPrintImage(halalLogo, 20, 0, 70)
-            // ..add(
-            //   StarXpandPageMode()
-            //     ..style(horizontalPositionTo: 50)
-            //     ..actionPrintText(
-            //       "PACK DATE\n"
-            //       "20/09/2023",
-            //     ),
-            // ),
-            );
+    printDoc.addPageMode(
+      StarXpandPageMode()
+        ..actionPrintImage(halalLogo, 10, 20, 70)
+        ..add(
+          StarXpandPageMode()
+            ..style(
+              horizontalPositionTo: 33,
+              verticalPositionTo: 20,
+            )
+            ..actionPrintText(
+              "PACK DATE\n"
+              "20/09/2023",
+            ),
+        ),
+    );
 
     printDoc.actionCut(StarXpandCutType.full);
 
