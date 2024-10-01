@@ -28,6 +28,15 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.launch
 
+import android.graphics.Canvas
+import android.graphics.Color
+import android.graphics.Paint
+import android.graphics.Rect
+import android.graphics.Typeface
+import android.text.Layout
+import android.text.StaticLayout
+import android.text.TextPaint
+import android.graphics.Bitmap
 /** StarxpandPlugin */
 class StarxpandPlugin : FlutterPlugin, MethodCallHandler, ActivityAware {
     private val tag = "StarxpandPlugin"
@@ -1009,11 +1018,53 @@ class StarxpandPlugin : FlutterPlugin, MethodCallHandler, ActivityAware {
                     val bmp = BitmapFactory.decodeByteArray(image, 0, image.size)
                     printerBuilder.actionPrintImage(ImageParameter(bmp, width))
                 }
+
+                "printGraphic" -> {
+                    val text = action["text"] as String
+                    printerBuilder.actionPrintImage(createImageParameterFromText(text))
+                }
             }
         }
         return printerBuilder
     }
 }
+private fun createImageParameterFromText(text: String):ImageParameter{
+    val width = 576
+    val typeface = Typeface.create(Typeface.MONOSPACE, Typeface.NORMAL)
+    val bitmap = createBitmapFromText(text,22,width,typeface);
+    return ImageParameter(bitmap,width)
+}
+ private fun createBitmapFromText(
+        text: String,textSize: Int,width: Int,typeface: Typeface?): Bitmap {
+        val paint = Paint()
+        val bitmap: Bitmap
+        paint.textSize = textSize.toFloat()
+        paint.typeface = typeface
+        paint.getTextBounds(text, 0, text.length, Rect())
+        val textPaint = TextPaint(paint)
+        val builder = StaticLayout.Builder.obtain(text,0,text.length,textPaint,width)
+            .setAlignment(Layout.Alignment.ALIGN_NORMAL)
+            .setLineSpacing(0f,1f)
+            .setIncludePad(false)
+
+        val staticLayout = builder.build()
+
+        // Create bitmap
+        bitmap = Bitmap.createBitmap(
+            staticLayout.width,
+            staticLayout.height,
+            Bitmap.Config.ARGB_8888
+        )
+
+        // Create canvas
+        val canvas: Canvas = Canvas(bitmap)
+        canvas.drawColor(Color.WHITE)
+        canvas.translate(0f, 0f)
+        staticLayout.draw(canvas)
+        return bitmap
+
+    }
+
 
 fun InterfaceType.value(): String {
     return when (this) {

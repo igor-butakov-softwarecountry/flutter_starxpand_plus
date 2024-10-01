@@ -290,6 +290,10 @@ class StarXpandDocumentPrint extends StarXpandDocumentContent {
     _actions.add({'action': 'printImage', 'image': image, 'width': width});
   }
 
+  actionPrintGraphic(String text) {
+    _actions.add({'action': 'printGraphic', 'text': text});
+  }
+
   List<Map> getActions() {
     return _actions;
   }

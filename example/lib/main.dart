@@ -155,6 +155,28 @@ class _MyAppState extends State<MyApp> {
     StarXpand.printDocument(printer, doc);
   }
 
+  _printGraphic(StarXpandPrinter printer) async {
+    var doc = StarXpandDocument();
+    var printDoc = StarXpandDocumentPrint();
+
+    printDoc.style(
+        internationalCharacter: StarXpandStyleInternationalCharacter.usa,
+        characterSpace: 0.0,
+        alignment: StarXpandStyleAlignment.center);
+
+    printDoc.actionPrintGraphic("Star Clothing Boutique\n" +
+        "123 Star Road\n" +
+        "City, State 12345\n" +
+        "\n" +
+        "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" +
+        "------------------------------------------------\n");
+
+    printDoc.actionCut(StarXpandCutType.full);
+
+    doc.addPrint(printDoc);
+    StarXpand.printDocument(printer, doc);
+  }
+
   int displayCounterText = 0;
 
   /**
@@ -194,7 +216,7 @@ class _MyAppState extends State<MyApp> {
           if (printers != null)
             for (var p in printers!)
               ListTile(
-                  onTap: () => _print(p),
+                  onTap: () => _printGraphic(p),
                   title: Text(p.model.label + "(${p.interface.name})"),
                   subtitle: Text(p.identifier),
                   trailing: Row(
