@@ -223,7 +223,8 @@ class _MyAppState extends State<MyApp> {
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       OutlinedButton(
-                          onPressed: () => _print(p), child: Text("Print")),
+                          onPressed: () => _printGraphic(p),
+                          child: Text("Print")),
                       Container(width: 4),
                       OutlinedButton(
                           onPressed: () => _openDrawer(p),
