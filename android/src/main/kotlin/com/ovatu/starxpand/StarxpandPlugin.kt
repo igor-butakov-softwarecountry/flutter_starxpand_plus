@@ -1021,7 +1021,7 @@ class StarxpandPlugin : FlutterPlugin, MethodCallHandler, ActivityAware {
 
                 "printGraphic" -> {
                     val text = action["text"] as String
-                    val textSize = (action["size"] as Int?) ?: 22
+                    val textSize = (action["textSize"] as Int?) ?: 22
                     printerBuilder.actionPrintImage(createImageParameterFromText(text,textSize))
                 }
             }
