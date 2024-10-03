@@ -1021,17 +1021,18 @@ class StarxpandPlugin : FlutterPlugin, MethodCallHandler, ActivityAware {
 
                 "printGraphic" -> {
                     val text = action["text"] as String
-                    printerBuilder.actionPrintImage(createImageParameterFromText(text))
+                    val textSize = (action["size"] as Int?) ?: 22
+                    printerBuilder.actionPrintImage(createImageParameterFromText(text,textSize))
                 }
             }
         }
         return printerBuilder
     }
 }
-private fun createImageParameterFromText(text: String):ImageParameter{
+private fun createImageParameterFromText(text: String,textSize: Int):ImageParameter{
     val width = 576
     val typeface = Typeface.create(Typeface.MONOSPACE, Typeface.NORMAL)
-    val bitmap = createBitmapFromText(text,22,width,typeface);
+    val bitmap = createBitmapFromText(text,textSize,width,typeface);
     return ImageParameter(bitmap,width)
 }
  private fun createBitmapFromText(
