@@ -597,7 +597,12 @@ class StarxpandPlugin : FlutterPlugin, MethodCallHandler, ActivityAware {
             else -> BuzzerChannel.No1
         }
 
-        return BuzzerBuilder().actionDrive(DriveParameter().setChannel(channel))
+        return BuzzerBuilder().actionDrive(DriveParameter()
+        .setChannel(channel)
+        .setRepeat(3)
+        .setOnTime(500)
+        .setOffTime(200)
+        )
     }
 
     private fun getDisplayBuilder(data: Map<*, *>): DisplayBuilder {
