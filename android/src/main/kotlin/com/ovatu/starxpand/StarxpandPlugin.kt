@@ -14,6 +14,9 @@ import com.starmicronics.stario10.starxpandcommand.*
 import com.starmicronics.stario10.starxpandcommand.display.Contrast
 import com.starmicronics.stario10.starxpandcommand.drawer.Channel
 import com.starmicronics.stario10.starxpandcommand.drawer.OpenParameter
+import com.starmicronics.stario10.starxpandcommand.buzzer.DriveParameter
+import com.starmicronics.stario10.starxpandcommand.buzzer.Channel  as BuzzerChannel
+
 import com.starmicronics.stario10.starxpandcommand.printer.*
 
 import io.flutter.embedding.engine.plugins.FlutterPlugin
@@ -546,6 +549,9 @@ class StarxpandPlugin : FlutterPlugin, MethodCallHandler, ActivityAware {
                         "drawer" -> {
                             docBuilder.addDrawer(getDrawerBuilder(data))
                         }
+                        "buzzer" -> {
+                            docBuilder.addBuzzer(getBuzzerBuilder(data))
+                        }
 
                         "print" -> {
                             docBuilder.addPrinter(getPrinterBuilder(data))
@@ -582,6 +588,16 @@ class StarxpandPlugin : FlutterPlugin, MethodCallHandler, ActivityAware {
             else -> Channel.No1
         }
         return DrawerBuilder().actionOpen(OpenParameter().setChannel(channel))
+    }
+
+    private fun getBuzzerBuilder(data: Map<*, *>): BuzzerBuilder {
+        val channel = when (data["channel"]) {
+            "no1" -> BuzzerChannel.No1
+            "no2" -> BuzzerChannel.No2
+            else -> BuzzerChannel.No1
+        }
+
+        return BuzzerBuilder().actionDrive(DriveParameter().setChannel(channel))
     }
 
     private fun getDisplayBuilder(data: Map<*, *>): DisplayBuilder {
