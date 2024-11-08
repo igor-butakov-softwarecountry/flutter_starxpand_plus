@@ -40,6 +40,11 @@ import android.text.Layout
 import android.text.StaticLayout
 import android.text.TextPaint
 import android.graphics.Bitmap
+import android.text.Spannable
+import android.text.SpannableString
+import android.text.SpannableStringBuilder
+import android.text.style.StyleSpan
+import android.text.style.UnderlineSpan
 /** StarxpandPlugin */
 class StarxpandPlugin : FlutterPlugin, MethodCallHandler, ActivityAware {
     private val tag = "StarxpandPlugin"
