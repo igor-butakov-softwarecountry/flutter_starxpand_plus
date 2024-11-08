@@ -1043,49 +1043,72 @@ class StarxpandPlugin : FlutterPlugin, MethodCallHandler, ActivityAware {
                 "printGraphic" -> {
                     val text = action["text"] as String
                     val textSize = (action["textSize"] as Int?) ?: 22
-                    printerBuilder.actionPrintImage(createImageParameterFromText(text,textSize))
+                    val bold = (action["bold"] as Boolean?) ?: false
+                    val underline = (action["underline"] as Boolean?) ?: false
+
+                    printerBuilder.actionPrintImage(createImageParameterFromText(text,textSize,bold,underline))
                 }
             }
         }
         return printerBuilder
     }
 }
-private fun createImageParameterFromText(text: String,textSize: Int):ImageParameter{
+private fun createImageParameterFromText(text: String,textSize: Int,  
+    isBold: Boolean = false,
+    isUnderline: Boolean = false):ImageParameter{
     val width = 576
     val typeface = Typeface.create(Typeface.MONOSPACE, Typeface.NORMAL)
     val bitmap = createBitmapFromText(text,textSize,width,typeface);
     return ImageParameter(bitmap,width)
 }
- private fun createBitmapFromText(
-        text: String,textSize: Int,width: Int,typeface: Typeface?): Bitmap {
-        val paint = Paint()
-        val bitmap: Bitmap
-        paint.textSize = textSize.toFloat()
-        paint.typeface = typeface
-        paint.getTextBounds(text, 0, text.length, Rect())
-        val textPaint = TextPaint(paint)
-        val builder = StaticLayout.Builder.obtain(text,0,text.length,textPaint,width)
-            .setAlignment(Layout.Alignment.ALIGN_NORMAL)
-            .setLineSpacing(0f,1f)
-            .setIncludePad(false)
 
-        val staticLayout = builder.build()
+private fun createBitmapFromText(
+    text: String,
+    textSize: Int,
+    width: Int,
+    typeface: Typeface?,
+    isBold: Boolean = false,
+    isUnderline: Boolean = false
+): Bitmap {
+    val paint = Paint()
+    val bitmap: Bitmap
 
-        // Create bitmap
-        bitmap = Bitmap.createBitmap(
-            staticLayout.width,
-            staticLayout.height,
-            Bitmap.Config.ARGB_8888
-        )
+    paint.textSize = textSize.toFloat()
+    paint.typeface = typeface
 
-        // Create canvas
-        val canvas: Canvas = Canvas(bitmap)
-        canvas.drawColor(Color.WHITE)
-        canvas.translate(0f, 0f)
-        staticLayout.draw(canvas)
-        return bitmap
-
+    // Apply bold if requested
+    if (isBold) {
+        paint.isFakeBoldText = true
     }
+
+    // Apply underline if requested
+    if (isUnderline) {
+        paint.isUnderlineText = true
+    }
+
+    paint.getTextBounds(text, 0, text.length, Rect())
+    val textPaint = TextPaint(paint)
+    val builder = StaticLayout.Builder.obtain(text, 0, text.length, textPaint, width)
+        .setAlignment(Layout.Alignment.ALIGN_NORMAL)
+        .setLineSpacing(0f, 1f)
+        .setIncludePad(false)
+
+    val staticLayout = builder.build()
+
+    // Create bitmap
+    bitmap = Bitmap.createBitmap(
+        staticLayout.width,
+        staticLayout.height,
+        Bitmap.Config.ARGB_8888
+    )
+
+    // Create canvas
+    val canvas = Canvas(bitmap)
+    canvas.drawColor(Color.WHITE)
+    canvas.translate(0f, 0f)
+    staticLayout.draw(canvas)
+    return bitmap
+}
 
 
 fun InterfaceType.value(): String {
