@@ -1043,10 +1043,9 @@ class StarxpandPlugin : FlutterPlugin, MethodCallHandler, ActivityAware {
                 "printGraphic" -> {
                     val text = action["text"] as String
                     val textSize = (action["textSize"] as Int?) ?: 22
-                    val bold = (action["bold"] as Boolean?) ?: false
-                    val underline = (action["underline"] as Boolean?) ?: false
+                 
 
-                    printerBuilder.actionPrintImage(createImageParameterFromText(text,textSize,bold,underline))
+                    printerBuilder.actionPrintImage(createImageParameterFromText(text,textSize ))
                 }
             }
         }
@@ -1066,29 +1065,50 @@ private fun createBitmapFromText(
     text: String,
     textSize: Int,
     width: Int,
-    typeface: Typeface?,
-    isBold: Boolean = false,
-    isUnderline: Boolean = false
+    typeface: Typeface?
 ): Bitmap {
     val paint = Paint()
     val bitmap: Bitmap
-
     paint.textSize = textSize.toFloat()
     paint.typeface = typeface
+    paint.color = Color.BLACK // Set default text color
 
-    // Apply bold if requested
-    if (isBold) {
-        paint.isFakeBoldText = true
+    val spannableText = SpannableStringBuilder()
+
+    // Regex to match <b> and <u> tags and wrap the text within them in corresponding spans
+    val boldPattern = "<b>(.*?)</b>".toRegex()
+    val underlinePattern = "<u>(.*?)</u>".toRegex()
+
+    // Find and replace <b> tags with bold span
+    var startIndex = 0
+    boldPattern.findAll(text).forEach { match ->
+        val range = match.range
+        spannableText.append(text.substring(startIndex, range.first)) // Append text before match
+        val boldSpan = SpannableString(match.groups[1]!!.value).apply {
+            setSpan(StyleSpan(Typeface.BOLD), 0, this.length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+        }
+        spannableText.append(boldSpan)
+        startIndex = range.last + 1
     }
+    spannableText.append(text.substring(startIndex)) // Append remaining text
 
-    // Apply underline if requested
-    if (isUnderline) {
-        paint.isUnderlineText = true
+    // Convert <u> tags
+    val finalText = SpannableStringBuilder()
+    startIndex = 0
+    underlinePattern.findAll(spannableText).forEach { match ->
+        val range = match.range
+        finalText.append(spannableText.substring(startIndex, range.first)) // Append text before match
+        val underlineSpan = SpannableString(match.groups[1]!!.value).apply {
+            setSpan(UnderlineSpan(), 0, this.length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+        }
+        finalText.append(underlineSpan)
+        startIndex = range.last + 1
     }
+    finalText.append(spannableText.substring(startIndex)) // Append remaining text
 
-    paint.getTextBounds(text, 0, text.length, Rect())
+    // Create StaticLayout for the text with spans applied
     val textPaint = TextPaint(paint)
-    val builder = StaticLayout.Builder.obtain(text, 0, text.length, textPaint, width)
+    val builder = StaticLayout.Builder.obtain(finalText, 0, finalText.length, textPaint, width)
         .setAlignment(Layout.Alignment.ALIGN_NORMAL)
         .setLineSpacing(0f, 1f)
         .setIncludePad(false)
@@ -1109,6 +1129,7 @@ private fun createBitmapFromText(
     staticLayout.draw(canvas)
     return bitmap
 }
+
 
 
 fun InterfaceType.value(): String {
