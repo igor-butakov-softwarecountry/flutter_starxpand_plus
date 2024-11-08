@@ -165,8 +165,8 @@ class _MyAppState extends State<MyApp> {
         alignment: StarXpandStyleAlignment.center);
 
     printDoc.actionPrintGraphic("Star Clothing Boutique\n" +
-        "123 Star Road\n" +
-        "City, State 12345\n" +
+        "<b>123 Star Road</b>\n" +
+        "<u>City, State 12345</u>\n" +
         "\n" +
         "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" +
         "------------------------------------------------\n");
