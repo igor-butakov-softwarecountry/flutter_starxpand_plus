@@ -702,6 +702,47 @@ class StarxpandPlugin : FlutterPlugin, MethodCallHandler, ActivityAware {
                     pageModeBuilder.actionPrintText(text)
                 }
 
+                "printBarcode" -> {
+                    val barcodeContent = action["content"] as String
+                    val symbology = when (action["symbology"] as String) {
+                        "upcE" -> BarcodeSymbology.UpcE
+                        "upcA" -> BarcodeSymbology.UpcA
+                        "jan8" -> BarcodeSymbology.Jan8
+                        "ean8" -> BarcodeSymbology.Ean8
+                        "jan13" -> BarcodeSymbology.Jan13
+                        "ean13" -> BarcodeSymbology.Ean13
+                        "code39" -> BarcodeSymbology.Code39
+                        "itf" -> BarcodeSymbology.Itf
+                        "code128" -> BarcodeSymbology.Code128
+                        "code93" -> BarcodeSymbology.Code93
+                        "nw7" -> BarcodeSymbology.NW7
+                        else -> BarcodeSymbology.UpcE
+                    }
+
+                    val param = BarcodeParameter(barcodeContent, symbology)
+                    if (action["printHri"] != null) {
+                        param.setPrintHri(action["printHri"] as Boolean)
+                    }
+                    if (action["barDots"] != null) {
+                        param.setBarDots(action["barDots"] as Int)
+                    }
+                    if (action["barRatioLevel"] != null) {
+                        param.setBarRatioLevel(
+                            when (action["barRatioLevel"] as String) {
+                                "levelPlus1" -> BarcodeBarRatioLevel.LevelPlus1
+                                "level0" -> BarcodeBarRatioLevel.Level0
+                                "levelMinus1" -> BarcodeBarRatioLevel.LevelMinus1
+                                else -> BarcodeBarRatioLevel.Level0
+                            }
+                        )
+                    }
+                    if (action["height"] != null) {
+                        param.setHeight(action["height"] as Double)
+                    }
+
+                    pageModeBuilder.actionPrintBarcode(param)
+                }
+
                 "printRuledLine" -> {
                     val xStart = action["xStart"] as Double
                     val yStart = action["yStart"] as Double

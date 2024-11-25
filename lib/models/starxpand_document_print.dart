@@ -115,6 +115,23 @@ class StarXpandPageMode extends StarXpandDocumentContent {
     _actions.add({'action': 'add', 'data': pageMode.getData()});
   }
 
+  actionPrintBarcode(String content,
+      {StarXpandBarcodeSymbology? symbology,
+      bool? printHri,
+      int? barDots,
+      StarXpandBarcodeBarRatioLevel? barRatioLevel,
+      double? height}) {
+    _actions.add({
+      'action': 'printBarcode',
+      'content': content,
+      'symbology': symbology?.name,
+      'printHri': printHri,
+      'barDots': barDots,
+      'barRatioLevel': barRatioLevel?.name,
+      'height': height
+    }..trim());
+  }
+
   actionPrintRuledLine({
     required double xStart,
     required double yStart,
