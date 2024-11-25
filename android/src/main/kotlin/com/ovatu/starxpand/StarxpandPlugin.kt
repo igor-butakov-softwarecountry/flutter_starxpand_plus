@@ -45,6 +45,11 @@ import android.text.SpannableString
 import android.text.SpannableStringBuilder
 import android.text.style.StyleSpan
 import android.text.style.UnderlineSpan
+ 
+import java.io.File
+import java.io.FileOutputStream
+import java.io.IOException
+
 /** StarxpandPlugin */
 class StarxpandPlugin : FlutterPlugin, MethodCallHandler, ActivityAware {
     private val tag = "StarxpandPlugin"
@@ -109,6 +114,7 @@ class StarxpandPlugin : FlutterPlugin, MethodCallHandler, ActivityAware {
         Log.d(tag, "onMethodCall: ${call.method} - ${call.arguments}")
 
         when (call.method) {
+            
             "monitor" -> monitor(call.arguments as Map<*, *>, result)
             "openConnection" -> openPrinterConnection(call.arguments as Map<*, *>, result)
             "closeConnection" -> closePrinterConnection(call.arguments as Map<*, *>, result)
@@ -751,7 +757,7 @@ class StarxpandPlugin : FlutterPlugin, MethodCallHandler, ActivityAware {
                 }
 
                 "addPageMode" -> {
-                    val pageModeAreaParameter = PageModeAreaParameter(58.0, 25.0)
+                    val pageModeAreaParameter = PageModeAreaParameter(58.0, 35.0)
                     var pageModeBuilder = getPageModeBuilder(action["data"] as Map<*, *>)
                     printerBuilder.addPageMode(pageModeAreaParameter, pageModeBuilder)
                 }
@@ -1063,7 +1069,38 @@ private fun createImageParameterFromText(text: String,textSize: Int,
     val width = 576
     val typeface = Typeface.create(Typeface.MONOSPACE, Typeface.NORMAL)
     val bitmap = createBitmapFromText(text,textSize,width,typeface);
+    val saved = saveBitmapAsImage(bitmap, "/storage/emulated/0/Download/text_image.png")
+
+    if (saved) {
+    println("Image saved successfully")
+    } else {
+        println("Failed to save image")
+    }
     return ImageParameter(bitmap,width)
+}
+
+private fun saveBitmapAsImage(bitmap: Bitmap, filePath: String): Boolean {
+    var fileOutputStream: FileOutputStream? = null
+    try {
+        val file = File(filePath)
+        fileOutputStream = FileOutputStream(file)
+        
+        // Compress and write bitmap to file as a PNG or JPEG
+        bitmap.compress(Bitmap.CompressFormat.PNG, 100, fileOutputStream)
+        
+        // If saving as JPEG, replace PNG with JPEG and adjust quality as needed
+        fileOutputStream.flush()
+        return true
+    } catch (e: IOException) {
+        e.printStackTrace()
+        return false
+    } finally {
+        try {
+            fileOutputStream?.close()
+        } catch (e: IOException) {
+            e.printStackTrace()
+        }
+    }
 }
 
 private fun createBitmapFromText(
@@ -1072,66 +1109,59 @@ private fun createBitmapFromText(
     width: Int,
     typeface: Typeface?
 ): Bitmap {
-    val paint = Paint()
-    val bitmap: Bitmap
-    paint.textSize = textSize.toFloat()
-    paint.typeface = typeface
-    paint.color = Color.BLACK // Set default text color
-
-    val spannableText = SpannableStringBuilder()
-
-    // Regex to match <b> and <u> tags and wrap the text within them in corresponding spans
-    val boldPattern = "<b>(.*?)</b>".toRegex()
-    val underlinePattern = "<u>(.*?)</u>".toRegex()
-
-    // Find and replace <b> tags with bold span
-    var startIndex = 0
-    boldPattern.findAll(text).forEach { match ->
-        val range = match.range
-        spannableText.append(text.substring(startIndex, range.first)) // Append text before match
-        val boldSpan = SpannableString(match.groups[1]!!.value).apply {
-            setSpan(StyleSpan(Typeface.BOLD), 0, this.length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
-        }
-        spannableText.append(boldSpan)
-        startIndex = range.last + 1
+    // Initialize paint
+    val paint = TextPaint().apply {
+        this.textSize = textSize.toFloat()
+        this.typeface = typeface
+        this.color = Color.BLACK
+        this.isAntiAlias = true
     }
-    spannableText.append(text.substring(startIndex)) // Append remaining text
+    
+    // Split text by tags <b> and <u>
+    val parts = Regex("(<b>|</b>|<u>|</u>)").split(text)
+    val styles = Regex("<b>|</b>|<u>|</u>").findAll(text).map { it.value }.toList()
 
-    // Convert <u> tags
-    val finalText = SpannableStringBuilder()
-    startIndex = 0
-    underlinePattern.findAll(spannableText).forEach { match ->
-        val range = match.range
-        finalText.append(spannableText.substring(startIndex, range.first)) // Append text before match
-        val underlineSpan = SpannableString(match.groups[1]!!.value).apply {
-            setSpan(UnderlineSpan(), 0, this.length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
-        }
-        finalText.append(underlineSpan)
-        startIndex = range.last + 1
+    // Prepare canvas dimensions
+    var totalHeight = 0
+    var maxWidth = width
+    val lineSpacing = 10 // Adjust line spacing as desired
+    val lines = mutableListOf<String>()
+
+    // Calculate width and height of each line
+    for (line in parts) {
+        val bounds = Rect()
+        paint.getTextBounds(line, 0, line.length, bounds)
+        totalHeight += bounds.height() + lineSpacing
+        lines.add(line)
     }
-    finalText.append(spannableText.substring(startIndex)) // Append remaining text
 
-    // Create StaticLayout for the text with spans applied
-    val textPaint = TextPaint(paint)
-    val builder = StaticLayout.Builder.obtain(finalText, 0, finalText.length, textPaint, width)
-        .setAlignment(Layout.Alignment.ALIGN_NORMAL)
-        .setLineSpacing(0f, 1f)
-        .setIncludePad(false)
-
-    val staticLayout = builder.build()
-
-    // Create bitmap
-    bitmap = Bitmap.createBitmap(
-        staticLayout.width,
-        staticLayout.height,
-        Bitmap.Config.ARGB_8888
-    )
-
-    // Create canvas
+    // Create bitmap with calculated height
+    val bitmap = Bitmap.createBitmap(maxWidth, totalHeight, Bitmap.Config.ARGB_8888)
     val canvas = Canvas(bitmap)
     canvas.drawColor(Color.WHITE)
-    canvas.translate(0f, 0f)
-    staticLayout.draw(canvas)
+
+    // Variables for positioning text on canvas
+    var yPos = 0
+    var currentStyleIndex = 0
+
+    // Draw each line with appropriate styling
+    for (line in lines) {
+        // Set bold and underline based on tag found in `styles`
+        if (currentStyleIndex < styles.size) {
+            when (styles[currentStyleIndex]) {
+                "<b>" -> paint.isFakeBoldText = true
+                "</b>" -> paint.isFakeBoldText = false
+                "<u>" -> paint.isUnderlineText = true
+                "</u>" -> paint.isUnderlineText = false
+            }
+            currentStyleIndex++
+        }
+        
+        // Draw the line on canvas
+        canvas.drawText(line, 0f, yPos.toFloat() + textSize, paint)
+        yPos += textSize + lineSpacing
+    }
+
     return bitmap
 }
 

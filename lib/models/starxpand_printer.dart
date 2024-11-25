@@ -82,7 +82,7 @@ class StarXpandPrinter {
 
   Map<String, dynamic> toMap() {
     return {
-      'model': model.name,
+      'model': 'tsp650II',
       'identifier': identifier,
       'interface': interface.name,
     };

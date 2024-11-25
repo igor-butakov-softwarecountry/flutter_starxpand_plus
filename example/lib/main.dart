@@ -155,6 +155,33 @@ class _MyAppState extends State<MyApp> {
     StarXpand.printDocument(printer, doc);
   }
 
+  _testBold() async {
+    StarXpandPrinter printer = StarXpandPrinter.fromMap({
+      "model": "1",
+      "identifier": "1",
+      "interface": "@",
+    });
+    var doc = StarXpandDocument();
+    var printDoc = StarXpandDocumentPrint();
+
+    printDoc.style(
+        internationalCharacter: StarXpandStyleInternationalCharacter.usa,
+        characterSpace: 0.0,
+        alignment: StarXpandStyleAlignment.center);
+
+    printDoc.actionPrintGraphic("Star Clothing Boutique\n" +
+        "<b>123 Star Road</b>\n" +
+        "<u>City, State 12345</u>\n" +
+        "\n" +
+        "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" +
+        "------------------------------------------------\n");
+
+    printDoc.actionCut(StarXpandCutType.full);
+
+    doc.addPrint(printDoc);
+    StarXpand.printDocument(printer, doc);
+  }
+
   _printGraphic(StarXpandPrinter printer) async {
     var doc = StarXpandDocument();
     var printDoc = StarXpandDocumentPrint();
@@ -212,7 +239,7 @@ class _MyAppState extends State<MyApp> {
         ),
         body: Column(children: [
           TextButton(
-              child: Text('Search for devices'), onPressed: () => _find()),
+              child: Text('Search for devices'), onPressed: () => _testBold()),
           if (printers != null)
             for (var p in printers!)
               ListTile(
