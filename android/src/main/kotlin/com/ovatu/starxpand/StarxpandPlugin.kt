@@ -122,6 +122,7 @@ class StarxpandPlugin : FlutterPlugin, MethodCallHandler, ActivityAware {
             "findPrinters" -> findPrinters(call.arguments as Map<*, *>, result)
             "printRawBytes" -> printRawBytes(call.arguments as Map<*, *>, result)
             "printDocument" -> printDocument(call.arguments as Map<*, *>, result, 1)
+            // ???
             "updateDisplay" -> printDocument(call.arguments as Map<*, *>, result, 1)
             "startInputListener" -> startInputListener(call.arguments as Map<*, *>, result)
             "stopInputListener" -> stopInputListener(call.arguments as Map<*, *>, result)
@@ -414,7 +415,13 @@ class StarxpandPlugin : FlutterPlugin, MethodCallHandler, ActivityAware {
                     if (callbackGuid != null) {
                         sendCallback(
                             callbackGuid, "printerFound", mutableMapOf(
-                                "model" to printer.information?.model?.value(),
+                                "model" to printer.information?.model?.value(), //smT300, smT300i
+                                //++
+                                "model_name" to printer.information?.model?.name,
+                                "emulation" to printer.information?.emulation,
+                                "bluetooth_detail_device" to printer.information?.detail?.bluetooth?.deviceName,
+                                "bluetooth_detail_address" to printer.information?.detail?.bluetooth?.address,
+                                //++
                                 "identifier" to printer.connectionSettings.identifier,
                                 "interface" to printer.connectionSettings.interfaceType.value()
                             )
@@ -780,7 +787,6 @@ class StarxpandPlugin : FlutterPlugin, MethodCallHandler, ActivityAware {
         }
         return pageModeBuilder
     }
-  
 
     private fun getPrinterBuilder(data: Map<*, *>): PrinterBuilder {
         val printerBuilder = PrinterBuilder()
@@ -1104,6 +1110,7 @@ class StarxpandPlugin : FlutterPlugin, MethodCallHandler, ActivityAware {
         return printerBuilder
     }
 }
+
 private fun createImageParameterFromText(text: String,textSize: Int,  
     isBold: Boolean = false,
     isUnderline: Boolean = false):ImageParameter{
@@ -1144,6 +1151,8 @@ private fun saveBitmapAsImage(bitmap: Bitmap, filePath: String): Boolean {
     }
 }
 
+// https://github.com/maimanazani/flutter_starxpand/commit/8db28018b02706f173039c39209ea6a8b0f19055
+// посмотреть как сделано, так как тут косяк
 private fun createBitmapFromText(
     text: String,
     textSize: Int,

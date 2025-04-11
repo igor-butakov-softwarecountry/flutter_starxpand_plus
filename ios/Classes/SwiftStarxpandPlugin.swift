@@ -24,6 +24,16 @@ public class SwiftStarxpandPlugin: NSObject, FlutterPlugin {
         case "printDocument": _printDocument(args: call.arguments as! [String:Any?], result: result)
         case "startInputListener": _startInputListener(args: call.arguments as! [String:Any?], result: result)
         case "stopInputListener": _stopInputListener(args: call.arguments as! [String:Any?], result: result)
+        
+        // https://github.com/Bridgeheadit/starxpand_flutter/ copy from
+        case "openConnection": _open(args: call.arguments as! [String:Any?], result: result)
+        case "closeConnection": _close(args: call.arguments as! [String:Any?], result: result)   
+        // TODO: implement as for android
+        // "getStatus" -> getStatus(call.arguments as Map<*, *>, result)
+        // "monitor" -> monitor(call.arguments as Map<*, *>, result)
+        // "printRawBytes" -> printRawBytes(call.arguments as Map<*, *>, result)
+        // "updateDisplay" -> printDocument(call.arguments as Map<*, *>, result, 1)
+        // --
             default:
             result(false)
         }
@@ -37,6 +47,82 @@ public class SwiftStarxpandPlugin: NSObject, FlutterPlugin {
           ]
         )
     }
+
+    // https://github.com/Bridgeheadit/starxpand_flutter/ copy from
+    func _open(args: [String:Any?], result: @escaping FlutterResult) {
+        let printer = getPrinter(args["printer"] as! [String:Any])
+        Task {
+            do {
+                try await printer.open()
+                result(true)
+             
+            } catch let e3rror {
+                result(false)
+            }
+        }
+    }
+
+    func _close(args: [String:Any?], result: @escaping FlutterResult) {
+        let printer = getPrinter(args["printer"] as! [String:Any])
+        Task {
+            do {
+                await printer.close()
+                result(true)
+             } catch let e3rror {
+                result(false)
+            }
+        }
+    }
+
+    // private fun getStatus(@NonNull args: Map<*, *>, result: Result) {
+    //     val printer = getPrinter(args["printer"] as Map<*, *>)
+    //     Log.d("status", "GetPrinterStatus $printer")
+
+    //     val job = SupervisorJob()
+    //     val scope = CoroutineScope(Dispatchers.Default + job)
+    //     scope.launch {
+    //         if (openPrinter(printer)) {
+    //             try {
+
+    //                 val status = printer.getStatusAsync().await();
+    //                 result.success(
+    //                     mutableMapOf(
+    //                         "hasError" to status.hasError,
+    //                         "coverOpen" to status.coverOpen,
+    //                         "drawerOpenCloseSignal" to status.drawerOpenCloseSignal,
+    //                         "paperEmpty" to status.paperEmpty,
+    //                         "paperNearEmpty" to status.paperNearEmpty,
+    //                         "reserved" to status.reserved,
+    //                         "detail" to mutableMapOf(
+    //                             "cleaningNotification" to status.detail.cleaningNotification,
+    //                             "cutterError" to status.detail.cutterError,
+    //                             "detectedPaperWidth" to status.detail.detectedPaperWidth,
+    //                             "drawer1OpenCloseSignal" to status.detail.drawer1OpenCloseSignal,
+    //                             "drawer1OpenedMethod" to status.detail.drawer1OpenedMethod?.value(),
+    //                             "drawer2OpenCloseSignal" to status.detail.drawer2OpenCloseSignal,
+    //                             "drawer2OpenedMethod" to status.detail.drawer2OpenedMethod?.value(),
+    //                             "drawerOpenError" to status.detail.drawerOpenError,
+    //                             "externalDevice1Connected" to status.detail.externalDevice1Connected,
+    //                             "externalDevice2Connected" to status.detail.externalDevice2Connected,
+    //                             "paperJamError" to status.detail.paperJamError,
+    //                             "paperPresent" to status.detail.paperPresent,
+    //                             "paperSeparatorError" to status.detail.paperSeparatorError,
+    //                             "partsReplacementNotification" to status.detail.partsReplacementNotification,
+    //                             "printUnitOpen" to status.detail.printUnitOpen,
+    //                             "rollPositionError" to status.detail.rollPositionError,
+    //                         ),
+    //                     )
+    //                 )
+    //             } catch (e: java.lang.Exception) {
+    //                 Log.d("status", "GetStatusError $e")
+    //                 result.error("error", e.localizedMessage, e)
+    //             } finally {
+    //                 closePrinter(printer)
+    //             }
+    //         }
+    //     }
+    // }    
+    // --
 
     func _findPrinters(args: [String:Any?], result: @escaping FlutterResult) {
         do {

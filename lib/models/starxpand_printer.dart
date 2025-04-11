@@ -55,6 +55,7 @@ enum StarXpandPrinterModel {
     try {
       return StarXpandPrinterModel.values
           .where((e) => e.name.toLowerCase() == name.toLowerCase())
+          // .where((e) => e.label.toLowerCase() == name.toLowerCase())
           .first;
     } catch (e) {
       return StarXpandPrinterModel.unknown;
@@ -74,6 +75,8 @@ class StarXpandPrinter {
   String identifier;
   StarXpandInterface interface;
 
+  // New
+
   /// Render a string repesentation of the response
   @override
   String toString() {
@@ -82,7 +85,7 @@ class StarXpandPrinter {
 
   Map<String, dynamic> toMap() {
     return {
-      'model': 'tsp650II',
+      'model': model.name,
       'identifier': identifier,
       'interface': interface.name,
     };
